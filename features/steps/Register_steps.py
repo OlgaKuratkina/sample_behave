@@ -1,6 +1,7 @@
 from behave import *
-from features.utils.pages import Page, RegisterPage, OnboardingPage
-from features.utils.locators import *
+from DOM.pages import Page, RegisterPage, OnboardingPage
+
+from DOM.locators import *
 
 
 @given('internet user is on start page')

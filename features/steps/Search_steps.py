@@ -1,9 +1,3 @@
-from behave import *
-from features.utils.pages import Page, RegisterPage
-from features.utils.locators import *
-from features.utils.helper_methods import random_password, random_phone
-
-
 # @given('registered user')
 # def step_impl(context):
 #     pass
