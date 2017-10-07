@@ -7,9 +7,13 @@ import datetime
 def before_all(context):
     print("Executing before all")
     context.now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-    context.browser = webdriver.Firefox()
-    # context.browser = webdriver.Firefox(firefox_binary=FirefoxBinary("c:\\Program Files\\Mozilla Firefox\\firefox.exe"))
-    context.browser.set_window_size(1280, 800)
+    context.username = None
+    context.password = None
+    # context.browser = webdriver.Firefox()
+    context.browser = webdriver.Firefox(firefox_binary=FirefoxBinary("c:\\Program Files\\Mozilla Firefox\\firefox.exe"))
+    # context.browser.set_window_size(1280, 800)
+    context.browser.maximize_window()
+    context.browser.implicitly_wait(2)
 
 
 def before_feature(context, feature):
@@ -29,4 +33,4 @@ def before_feature(context, feature):
 
 def after_all(context):
     print('Testing finished')
-    context.browser.quit()
+    # context.browser.quit()

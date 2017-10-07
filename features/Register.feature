@@ -7,8 +7,19 @@ Scenario: Internet User can navigate to /registration page and see registration 
     And user clicks on Register button
     Then user sees the registration form with five fields
 
-Scenario: Internet User can navigate to /registration page and see registration form
+Scenario Outline: Internet User can navigate to /registration page and see registration form
     Given internet user is on register page
-    When user registers with email and random password
-    And user clicks on Register button
-    Then user sees the registration form with five fields
+    When user registers with <email> and <password>
+    Then user will land into the onboarding process
+
+    Examples:
+     | email                            | password  |
+     | qacandidaeolg@packlink.es        | 145qwerty |
+     | abc@domain.com                   | 123qwerty |
+   #  | qacandidatekuratkina@packlink.es |
+
+Scenario: Registered client can login and finish onboarding
+    Given registered user
+    When user log in for the first time
+    Then user will complete the onboarding process
+
