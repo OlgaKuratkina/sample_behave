@@ -1,19 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-import os
-import datetime
+import logging
+
+logging.basicConfig(filename='test.log', level=logging.DEBUG,
+                    format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 def before_all(context):
     print("Executing before all")
-    context.now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-    context.username = None
-    context.password = None
+    context.timeout_tries = 5
+    context.logging = logging
+    context.username = 'qacandidaeolgak@packlink.es'
+    context.password = '145qwerty'
     # context.browser = webdriver.Firefox()
     context.browser = webdriver.Firefox(firefox_binary=FirefoxBinary("c:\\Program Files\\Mozilla Firefox\\firefox.exe"))
     # context.browser.set_window_size(1280, 800)
     context.browser.maximize_window()
-    context.browser.implicitly_wait(2)
+    context.browser.implicitly_wait(1)
 
 
 def before_feature(context, feature):

@@ -14,12 +14,17 @@ Scenario Outline: Internet User can navigate to /registration page and see regis
 
     Examples:
      | email                            | password  |
-     | qacandidaeolg@packlink.es        | 145qwerty |
-     | abc@domain.com                   | 123qwerty |
+     | qacandidaeolgak@packlink.es      | 145qwerty |
+    # | abc@domain.com                   | 123qwerty |
    #  | qacandidatekuratkina@packlink.es |
 
-Scenario: Registered client can login and finish onboarding
+Scenario Outline: Registered client can login and finish onboarding
     Given registered user
-    When user log in for the first time
+    When user log in for the first time with <email> and <password>
     Then user will complete the onboarding process
+
+      Examples:
+     | email                             | password  |
+     | qacandidaeolgak@packlink.es       | 145qwerty |
+     #| abc@domain.com                   | 123qwerty |
 
