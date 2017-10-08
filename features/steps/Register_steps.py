@@ -1,5 +1,7 @@
 from behave import *
-from DOM.pages import Page, RegisterPage, OnboardingPage
+from DOM.pages import Page
+from DOM.register_page import RegisterPage
+from DOM.onboarding_page import OnboardingPage
 
 from DOM.locators import *
 

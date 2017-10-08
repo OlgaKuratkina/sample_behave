@@ -1,5 +1,6 @@
 from behave import *
-from DOM.pages import SearchPage, RegisterPage, OnboardingPage
+from DOM.search_page import SearchPage
+from DOM.register_page import RegisterPage
 
 from DOM.locators import *
 
@@ -23,10 +24,7 @@ def step_impl(context):
 
         page = SearchPage(context)
 
-        create_search_list = page.find_element_waiting(search_page.create_sending_list)
-        page.actions.move_to_element(create_search_list).perform()
-        create_search = page.find_element_waiting(search_page.create_sending)
-        page.actions.move_to_element(create_search).click(create_search).perform()
+        page.choose_create_new_sending()
 
         # page.delete_predefined_address()
         page.search_for_sending(address, destination, weight, length, width, height)
@@ -43,4 +41,3 @@ def step_impl(context):
     details = page.find_element_waiting(search_page.sending_details)
     print(details.text)
     assert details
-    assert 'Detalles'.lower() in details.text.lower()

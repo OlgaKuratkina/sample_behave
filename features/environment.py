@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import logging
 
+from DOM.pages import Page
+
 logging.basicConfig(filename='test.log', level=logging.DEBUG,
                     format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -14,13 +16,8 @@ def before_all(context):
     context.password = '145qwerty'
     # context.browser = webdriver.Firefox()
     context.browser = webdriver.Firefox(firefox_binary=FirefoxBinary("c:\\Program Files\\Mozilla Firefox\\firefox.exe"))
-    # context.browser.set_window_size(1280, 800)
     context.browser.maximize_window()
     context.browser.implicitly_wait(1)
-
-
-def before_feature(context, feature):
-    print(feature.tags)
 
 
 # def after_scenario(context, scenario):
