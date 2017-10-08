@@ -19,16 +19,15 @@ def step_impl(context):
 @when('performing a search with set of details')
 def step_impl(context):
     for row in context.table:
-        address = row[0]
-        destination = row[1]
-        weight = row[2]
-        length = row[3]
-        width = row[4]
-        height = row[5]
+        address, destination, weight, length, width, height = row
+
         page = SearchPage(context)
-        page.scroll_down()
-        search_button = page.find_element_waiting(search_page.new_search_button)
-        search_button.click()
+
+        create_search_list = page.find_element_waiting(search_page.create_sending_list)
+        page.actions.move_to_element(create_search_list).perform()
+        create_search = page.find_element_waiting(search_page.create_sending)
+        page.actions.move_to_element(create_search).click(create_search).perform()
+
         # page.delete_predefined_address()
         page.search_for_sending(address, destination, weight, length, width, height)
         services = page.find_element_waiting(search_page.service_list, many=True)
@@ -40,6 +39,8 @@ def step_impl(context):
     page = SearchPage(context)
     services = page.find_element_waiting(search_page.services_list_buttons, many=True)
     services[0].click()
+
     details = page.find_element_waiting(search_page.sending_details)
     print(details.text)
     assert details
+    assert 'Detalles'.lower() in details.text.lower()

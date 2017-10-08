@@ -70,8 +70,8 @@ def step_impl(context):
 @given('registered user')
 def step_impl(context):
     page = OnboardingPage(context)
+    page.goto_base_page()
     page.safe_logout()
-    assert 1
 
 
 @when("user log in for the first time with {email} and {password}")
@@ -97,9 +97,3 @@ def step_impl(context):
     # assert create_link
     page.safe_logout()
 
-
-
-# @when('we implement {number:d} tests')
-# def step_impl(context, number):  # -- NOTE: number is converted into integer
-#     assert number > 1 or number == 0
-#     context.tests_count = number
