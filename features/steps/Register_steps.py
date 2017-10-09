@@ -30,7 +30,7 @@ def step_impl(context):
     assert page.browser.current_url.endswith(register_page.url)  # Check that we navigated to the correct address
 
 
-@step("user sees the registration form with five fields")
+@then("user sees the registration form with five fields")
 def step_impl(context):
     print('I see the form')
     page = Page(context)
@@ -66,7 +66,8 @@ def step_impl(context):
     page = Page(context)
     next_button = page.find_element_waiting(onboarding_page.next_button)
     assert not next_button
-    pass
+    # assert page.browser.current_url.endswith('onboarding')
+    # we have to logout here!
 
 
 @given('registered user')
