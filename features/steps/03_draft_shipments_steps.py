@@ -7,7 +7,10 @@ from DOM.locators import *
 
 @given('a registered client logged in')
 def step_impl(context):
+    page = CreateSendingPage(context)
     context.execute_steps('Given registered client logged in')
+    sendings_table = page.find_element_waiting(create_sending_page.sendings_table, many=True)
+    context.sendings = len(sendings_table)
 
 
 @when('a service has been selected')
@@ -37,6 +40,7 @@ def step_impl(context):
     page = CreateSendingPage(context)
     sendings_table = page.find_element_waiting(create_sending_page.sendings_table, many=True)
     assert len(sendings_table) > 1  # assuming one row is always empty
+    assert len(sendings_table) > context.sendings
 
 
 @given('a registered client')

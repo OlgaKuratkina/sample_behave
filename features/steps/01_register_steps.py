@@ -19,14 +19,12 @@ def step_impl(context):
 
 @when("user navigates Pro Packlink")
 def step_impl(context):
-    print('I navigate to register page')
     page = Page(context)
     page.find_element_by_locator(base_page.navigate_to_pro).click()
 
 
 @when("user clicks on Register button")
 def step_impl(context):
-    print('I click register')
     page = Page(context)
     page.waiting(page.find_element_by_locator(register_page.register_button)).click()
     assert page.browser.current_url.endswith(register_page.url)  # Check that we navigated to the correct address
@@ -34,7 +32,6 @@ def step_impl(context):
 
 @then("user sees the registration form with five fields")
 def step_impl(context):
-    print('I see the form')
     page = Page(context)
     email_field = page.find_element_by_locator(register_form.email_field)
     assert email_field
@@ -63,14 +60,12 @@ def step_impl(context, email):
     context.first_time_email = email
     context.first_time_password = password
     page.register_user(email, password)
-    # TODO add something to wait for when registration finishes and come back to registration page
 
 
 @then("user will land into the onboarding process")
 def step_impl(context):
     print(context.first_time_email)
     print(context.first_time_password)
-    # assert context.first_time_email == 'qacandidaeolgak@packlink.es'
     page = Page(context)
     next_button = page.find_element_waiting(onboarding_page.next_button)
     assert next_button
@@ -103,11 +98,9 @@ def step_impl(context):
     page.scroll_down()
     next_button = page.find_element_waiting(onboarding_page.next_button)
     next_button.click()
-    page.fill_in_onboarding_data()  #TODO uncomment when its ready
+    page.fill_in_onboarding_data()
     page.fill_in_package_info()
     page.scroll_down()
-    # create_link = page.find_element_waiting(onboarding_form.create_link)
     text_link = page.get_attribute_safe(onboarding_form.create_link, 'text')
     assert text_link == 'Crear'
     page.safe_logout()
-    # page.find_element_waiting(register_page.login_button)

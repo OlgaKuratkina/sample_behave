@@ -13,9 +13,9 @@ Scenario Outline: Internet User can register with email and random password and 
     Then user will land into the onboarding process
 
     Examples:
-     | email                            |
-    # | qacandidaeolgak@packlink.es      |
-      | testabc6@domain.com               |
+      | email                                   |
+      | qacandidateolgakuratkina1@packlink.es   |
+      | qacandidateolgaukraine@packlink.es      |
    #  | qacandidatekuratkina@packlink.es |
 
  Scenario: Registered client can login and finish onboarding
