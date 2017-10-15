@@ -1,2 +1,10 @@
-selenium==2.53.6
+allure-behave==2.2.2b2
+allure-python-commons==2.2.2b2
+attrs==17.2.0
 behave==1.2.5
+enum34==1.1.6
+parse==1.8.2
+parse-type==0.4.2
+pluggy==0.5.2
+selenium==2.53.6
+six==1.11.0

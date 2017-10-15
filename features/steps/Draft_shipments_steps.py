@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from behave import *
-from DOM.pages import Page
+from DOM.pages import Page, CreateSendingPage
 from DOM.search_page import SearchPage
 
 from DOM.locators import *
@@ -8,6 +10,9 @@ from DOM.locators import *
 @given('a registered client logged in')
 def step_impl(context):
     context.execute_steps('Given registered client logged in')
+    page = SearchPage(context)
+    sendings_table = page.find_element_waiting(create_sending_page.sendings_table, many=True)
+    context.number_drafts = len(sendings_table)
 
 
 @when('a service has been selected')
@@ -30,38 +35,41 @@ def step_impl(context):
     page = Page(context)
     save_button = page.find_element_by_locator(create_sending_page.save_button)
     save_button.click()
+    context.number_drafts += 1
 
 
 @then('it will appear in the shipment list')
 def step_impl(context):
     page = CreateSendingPage(context)
     sendings_table = page.find_element_waiting(create_sending_page.sendings_table, many=True)
+    print(context.number_drafts)
     assert len(sendings_table) > 1  # assuming one row is always empty
+    # assert len(sendings_table) == context.number_drafts
 
 
-@given('a registered client')
-def step_impl(context):
-    pass
-
-
-@when('on the shipments page')
-def step_impl(context):
-    page = Page(context)
-    page.goto_shipments_page()
-
-
-@then('he can delete shipment')
-def step_impl(context):
-    page = Page(context)
-    sending = page.find_element_waiting(create_sending_page.sending_link, many=True)
-    sending[0].click()
-
-    delete_button = page.find_element_waiting(create_sending_page.delete_button)
-    delete_button.click()
-
-
-@then('it will disappear from the list')
-def step_impl(context):
-    page = Page(context)
-    sendings_table = page.find_element_waiting(create_sending_page.sendings_table, many=True)
-    assert len(sendings_table) == 1  # assuming one row is always empty
+# @given('a registered client')
+# def step_impl(context):
+#     pass
+#
+#
+# @when('on the shipments page')
+# def step_impl(context):
+#     page = Page(context)
+#     page.goto_shipments_page()
+#
+#
+# @then('he can delete shipment')
+# def step_impl(context):
+#     page = Page(context)
+#     sending = page.find_element_waiting(create_sending_page.sending_link, many=True)
+#     sending[0].click()
+#
+#     delete_button = page.find_element_waiting(create_sending_page.delete_button)
+#     delete_button.click()
+#
+#
+# @then('it will disappear from the list')
+# def step_impl(context):
+#     page = Page(context)
+#     sendings_table = page.find_element_waiting(create_sending_page.sendings_table, many=True)
+#     assert len(sendings_table) == 1  # assuming one row is always empty

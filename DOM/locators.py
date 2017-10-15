@@ -11,6 +11,7 @@ onboarding_page = namedtuple('onboarding_page', ['next_button', 'logout'])
 onboarding_form = namedtuple('onboarding_form', ['name_field', 'last_name_filed', 'postal_code_field',
                                                  'address_field', 'packet_weight', 'packet_length', 'packet_width',
                                                  'packet_height', 'submit_package', 'create_link'])
+pro_page = namedtuple('pro_page', ['url'])
 
 search_page = namedtuple('seacrh_page', ['create_sending_list', 'create_sending',
                                          'change_address_button', 'new_address_button',
@@ -29,6 +30,8 @@ base_page = base_page_locators(url='https://www.packlink.es/',
 register_page = register_page(url='https://pro.packlink.es/registro',
                               register_button='link=Empieza a enviar',
                               login_button='link=Acceder')
+
+pro_page = pro_page('https://pro.packlink.es/')
 
 register_form = register_form(email_field='css=input#signUpFormEmail',
                               password_field='css=input#signUpFormPassword',

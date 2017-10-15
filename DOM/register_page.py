@@ -17,9 +17,7 @@ class RegisterPage(Page):
         password_field = self.find_element_by_locator(login_form.password_field)
         password_field.send_keys(password, Keys.RETURN)
 
-    def register_user(self, email, password=None, phone=None, sendings_index=1, shops_index=1, marketplace_index=1):
-        if not password:
-            password = random_password(10)
+    def register_user(self, email, password, phone=None, sendings_index=1, shops_index=1, marketplace_index=1):
         if not phone:
             phone = random_phone()
 

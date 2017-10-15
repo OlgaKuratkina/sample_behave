@@ -11,9 +11,15 @@ logging.basicConfig(filename='test.log', level=logging.DEBUG,
 def before_all(context):
     print("Executing before all")
     context.timeout_tries = 5
+    context.number_drafts = 0
     context.logging = logging
     context.username = 'qacandidaeolgak@packlink.es'
     context.password = '145qwerty'
+    context.first_time_email = ''
+    context.first_time_password = ''
+
+
+def before_feature(context, feature):
     # context.browser = webdriver.Firefox()
     context.browser = webdriver.Firefox(firefox_binary=FirefoxBinary("c:\\Program Files\\Mozilla Firefox\\firefox.exe"))
     context.browser.maximize_window()
@@ -30,7 +36,11 @@ def before_all(context):
 #             context.browser.save_screenshot(folder + "/" + file_name)
 #             print('Screenshoot for fail: ' + scenario.name + " " + os.path.realpath(file_name) + '\n')
 
-
-def after_all(context):
+def after_feature(context, feature):
     print('Testing finished')
-    # context.browser.quit()
+    context.browser.quit()
+
+
+# def after_all(context):
+#     print('Testing finished')
+#     context.browser.quit()

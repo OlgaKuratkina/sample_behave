@@ -1,18 +1,52 @@
 from behave import *
 from DOM.search_page import SearchPage
 from DOM.register_page import RegisterPage
+from DOM.onboarding_page import OnboardingPage
 
 from DOM.locators import *
+
+
+@given('registered user')
+def step_impl(context):
+    page = OnboardingPage(context)
+    page.goto_base_page()
+    # page.safe_logout()
+
+
+@when("user log in for the first time")
+def step_impl(context):
+    page = RegisterPage(context)
+    page.goto_pro_page()
+
+    email = context.first_time_email
+    password = context.first_time_password
+    page.find_element_by_locator(register_page.login_button).click()
+    page.login_user(email=email, password=password)
+
+
+@then("user will complete the onboarding process")
+def step_impl(context):
+    page = OnboardingPage(context)
+
+    page.scroll_down()
+    next_button = page.find_element_waiting(onboarding_page.next_button)
+    next_button.click()
+    page.fill_in_onboarding_data()  #TODO uncomment when its ready
+    page.fill_in_package_info()
+    create_link = page.find_element_waiting(onboarding_form.create_link)
+    assert create_link
+    page.safe_logout()
 
 
 @given('registered client logged in')
 def step_impl(context):
     username = context.username
     password = context.password
-    context.execute_steps("Given internet user is on start page")
-    context.execute_steps("When user navigates Pro Packlink")
+    # context.execute_steps("Given internet user is on start page")
+    # context.execute_steps("When user navigates Pro Packlink")
 
     page = RegisterPage(context)
+    page.goto_pro_page()
     page.find_element_by_locator(register_page.login_button).click()
     page.login_user(username, password)
 

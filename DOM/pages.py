@@ -54,6 +54,9 @@ class Page:
     def goto_base_page(self):
         self.browser.get(base_page.url)
 
+    def goto_pro_page(self):
+        self.browser.get(pro_page.url)
+
     def goto_register_page(self):
         self.browser.get(register_page.url)
 
