@@ -12,12 +12,15 @@ Installation
 6) Create new virtual environment from inside folder with cloned repo with command -
     virtualenv venv
 7) Activate new environment with command -
-    source ./venv/bin/activate  # for mac
-    venv\Scripts\Activate       # for windows
+
+    $  source ./venv/bin/activate  # for mac
+    $  venv\Scripts\Activate       # for windows
+
 8) Install requirements with command -
-    pip3 install -r requirements.txt
+    $  pip3 install -r requirements.txt
+    
 9) Run tests from within folder with test repo with command -
-    behave
+    $  behave
     (for specific feature - behave\features\{feature_name})
 
 Please keep in mind - as its impossible to delete user from packlink.es website,
