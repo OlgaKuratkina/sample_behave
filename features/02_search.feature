@@ -1,5 +1,6 @@
 Feature: Search
 
+
 Scenario: Registered client can perform the search
     Given registered client logged in
     # # I decided to go to registration page manually to check all the natural flow

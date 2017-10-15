@@ -5,6 +5,8 @@ from DOM.onboarding_page import OnboardingPage
 
 from DOM.locators import *
 
+from features.utils.helper_methods import random_password
+
 
 @given('internet user is on start page')
 def step_impl(context):
@@ -54,37 +56,44 @@ def step_impl(context):
     page.goto_register_page()
 
 
-@when("user registers with {email} and {password}")
-def step_impl(context, email, password):
+@when("user registers with {email} and password")
+def step_impl(context, email):
     page = RegisterPage(context)
+    password = random_password(10)
+    context.first_time_email = email
+    context.first_time_password = password
     page.register_user(email, password)
     # TODO add something to wait for when registration finishes and come back to registration page
 
 
 @then("user will land into the onboarding process")
 def step_impl(context):
+    print(context.first_time_email)
+    print(context.first_time_password)
+    # assert context.first_time_email == 'qacandidaeolgak@packlink.es'
     page = Page(context)
     next_button = page.find_element_waiting(onboarding_page.next_button)
-    assert not next_button
-    # assert page.browser.current_url.endswith('onboarding')
-    # we have to logout here!
+    assert next_button
+    assert page.browser.current_url.endswith('onboarding')
 
 
 @given('registered user')
 def step_impl(context):
+    print(context.first_time_email)
+    print(context.first_time_password)
     page = OnboardingPage(context)
     page.goto_base_page()
     page.safe_logout()
 
 
-@when("user log in for the first time with {email} and {password}")
-def step_impl(context, email, password):
-    context.execute_steps("Given internet user is on start page")
+@when("user log in for the first time")
+def step_impl(context):
     context.execute_steps("When user navigates Pro Packlink")
-
+    email = context.first_time_email
+    password = context.first_time_password
     page = RegisterPage(context)
-    page.find_element_by_locator(register_page.login_button).click()
-    page.login_user(email=email, password=password)
+    page.find_element_waiting(register_page.login_button).click()
+    page.safe_login_user(email=email, password=password)
 
 
 @then("user will complete the onboarding process")
@@ -94,9 +103,11 @@ def step_impl(context):
     page.scroll_down()
     next_button = page.find_element_waiting(onboarding_page.next_button)
     next_button.click()
-    # page.fill_in_onboarding_data()  #TODO uncomment when its ready
-    # page.fill_in_package_info()
+    page.fill_in_onboarding_data()  #TODO uncomment when its ready
+    page.fill_in_package_info()
+    page.scroll_down()
     # create_link = page.find_element_waiting(onboarding_form.create_link)
-    # assert create_link
+    text_link = page.get_attribute_safe(onboarding_form.create_link, 'text')
+    assert text_link == 'Crear'
     page.safe_logout()
-
+    # page.find_element_waiting(register_page.login_button)

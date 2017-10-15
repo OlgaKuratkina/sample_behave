@@ -9,12 +9,11 @@ from DOM.locators import *
 def step_impl(context):
     username = context.username
     password = context.password
-    context.execute_steps("Given internet user is on start page")
-    context.execute_steps("When user navigates Pro Packlink")
-
     page = RegisterPage(context)
-    page.find_element_by_locator(register_page.login_button).click()
-    page.login_user(username, password)
+    page.goto_pro_page()
+
+    page.find_element_waiting(register_page.login_button).click()
+    page.safe_login_user(username, password)
 
 
 @when('performing a search with set of details')

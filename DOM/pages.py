@@ -1,6 +1,7 @@
 import time
 
 import selenium.webdriver.support.ui as ui
+from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -29,7 +30,7 @@ class Page:
                 return element
             except NoSuchElementException:
                 number_tries -= 1
-                time.sleep(0.5)
+                time.sleep(0.6)
 
     def get_attribute_safe(self, locator, attribute):
         num_tries = self.context.timeout_tries
@@ -56,15 +57,27 @@ class Page:
 
     def goto_register_page(self):
         self.browser.get(register_page.url)
+        time.sleep(0.5)
 
     def goto_shipments_page(self):
         self.browser.get(create_sending_page.url)
+        time.sleep(0.5)
+
+    def goto_pro_page(self):
+        self.browser.get(pro_page.url)
+        time.sleep(0.5)
+
+    def safe_login_user(self, email, password):
+        email_field = self.find_element_waiting(login_form.email_field)
+        if email_field:
+            email_field.send_keys(email, Keys.ENTER)
+
+        password_field = self.find_element_waiting(login_form.password_field)
+        if password_field:
+            password_field.send_keys(password, Keys.RETURN)
 
     def safe_logout(self):
-        try:
-            logout = self.find_element_waiting(onboarding_page.logout)
-        except NoSuchElementException or AttributeError:
-            return
+        logout = self.find_element_waiting(onboarding_page.logout)
         if logout:
             logout.click()
 

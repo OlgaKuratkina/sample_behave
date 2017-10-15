@@ -10,13 +10,6 @@ class RegisterPage(Page):
     def __abs__(self, context):
         Page.__init__(self, context)
 
-    def login_user(self, email, password):
-        email_field = self.waiting(self.find_element_by_locator(login_form.email_field))
-        email_field.send_keys(email, Keys.ENTER)
-
-        password_field = self.find_element_by_locator(login_form.password_field)
-        password_field.send_keys(password, Keys.RETURN)
-
     def register_user(self, email, password=None, phone=None, sendings_index=1, shops_index=1, marketplace_index=1):
         if not password:
             password = random_password(10)

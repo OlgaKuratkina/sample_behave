@@ -7,7 +7,7 @@ Feature: Draft Shipments
   And it will appear in the shipment list
 
 
-# TODO to be implemented
+# TODO could be implemented
 #  Scenario: registered user can delete sending from drafts
 #  Given a registered client
 #  When on the shipments page

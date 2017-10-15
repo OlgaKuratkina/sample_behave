@@ -41,7 +41,7 @@ class OnboardingPage(Page):
         time.sleep(0.5)
         webelement.send_keys(Keys.RETURN)
 
-    def fill_in_package_info(self, weight=1, length=1, width=1, height=1):
+    def fill_in_package_info(self, weight=1, length=10, width=10, height=10):
         weight_field = self.find_element_waiting(onboarding_form.packet_weight)
         weight_field.send_keys(weight)
 

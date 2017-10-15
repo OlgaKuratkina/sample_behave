@@ -1,5 +1,5 @@
 from behave import *
-from DOM.pages import Page
+from DOM.pages import Page, CreateSendingPage
 from DOM.search_page import SearchPage
 
 from DOM.locators import *
@@ -42,6 +42,8 @@ def step_impl(context):
 @given('a registered client')
 def step_impl(context):
     pass
+
+# Could be Implemented for deleting the shipment
 
 
 @when('on the shipments page')

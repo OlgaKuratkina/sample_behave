@@ -6,6 +6,7 @@ base_page_locators = namedtuple('base_page', ['url', 'header_moto', 'navigate_to
 register_page = namedtuple('register_page', ['url', 'register_button', 'login_button'])
 register_form = namedtuple('register_form', ['email_field', 'password_field', 'sendings_qty', 'online_shops',
                                              'marketplace_shops', 'phone_field', 'submit_button'])
+pro_page = namedtuple('pro_page', ['url'])
 login_form = namedtuple('login_form', ['email_field', 'password_field', 'submit_button'])
 onboarding_page = namedtuple('onboarding_page', ['next_button', 'logout'])
 onboarding_form = namedtuple('onboarding_form', ['name_field', 'last_name_filed', 'postal_code_field',
@@ -45,6 +46,8 @@ login_form = login_form(email_field='css=input#signInFormUser',
 onboarding_page = onboarding_page(next_button='css=button#btn-welcomenew-next',
                                   logout='xpath=//header//li[3]//span')
 
+pro_page = pro_page('https://pro.packlink.es/')
+
 onboarding_form = onboarding_form(name_field='css=input#sender-name',
                                   last_name_filed='css=input#sender-surname',
                                   postal_code_field='css=input#postalcode',
@@ -54,7 +57,7 @@ onboarding_form = onboarding_form(name_field='css=input#sender-name',
                                   packet_width='css=input#width',
                                   packet_height='css=input#height',
                                   submit_package='css=button#parcel-form-submit',
-                                  create_link='link=Crear')
+                                  create_link='xpath=//section/div/div[2]/a')
 
 search_page = search_page(create_sending_list='xpath=//header/div/nav/span',
                           create_sending='xpath=//header//ul/li[1]',
